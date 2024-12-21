@@ -1,6 +1,6 @@
 # **Diy-Ai** : L'Assistant DIY Intelligent
 
-![Logo](https://via.placeholder.com/150)  <!-- Remplacez par votre logo -->
+![Logo](https://f.top4top.io/p_32777joty0.jpg)  <!-- Remplacez par votre logo -->
 
 ---
 
