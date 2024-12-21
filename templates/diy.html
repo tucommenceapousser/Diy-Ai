@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trhacknon DIY Helper</title>
+    <link rel="stylesheet" href="/static/css/diy.css">
+</head>
+<body>
+    <div class="container">
+        <h1>trhacknon DIY Helper</h1>
+        <p class="description">
+            Cet outil vous permet de trouver des idées de projets DIY selon vos thèmes ou matériaux à disposition,
+            ou d'obtenir des étapes détaillées pour réaliser un projet. Développé par <strong>trhacknon</strong>.
+        </p>
+        <form id="diyForm">
+            <input type="text" id="prompt" placeholder="Entrez un thème ou un projet précis" required>
+            <select id="type_request">
+                <option value="idea">Trouver une idée de projet DIY</option>
+                <option value="method">Obtenir une méthode pour un projet précis</option>
+            </select>
+            <button type="submit">Envoyer</button>
+        </form>
+        <div id="result" class="result scrollable" style="display: none;"></div>
+    </div>
+    <footer>
+        © 2024 <strong>trhacknon</strong>. Tous droits réservés. Développé pour partager l'esprit DIY.
+    </footer>
+    <script src="/static/js/diy.js"></script>
+</body>
+</html>
