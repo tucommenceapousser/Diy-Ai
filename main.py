@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, jsonify
 import openai
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 
 # Configurez votre clé API OpenAI
-openai.api_key = ""
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 @app.route("/")
 def home():
