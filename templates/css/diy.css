@@ -1,0 +1,176 @@
+/* Reset de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corps principal */
+body {
+    background-color: #0d1117; /* Fond sombre */
+    color: #c9d1d9; /* Texte clair */
+    font-family: "Arial", sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Conteneur principal */
+.container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px solid #58a6ff; /* Bordure fluo */
+    border-radius: 10px;
+    background-color: #161b22; /* Fond des cartes */
+    box-shadow: 0 0 15px rgba(88, 166, 255, 0.5);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(88, 166, 255, 0.8);
+}
+
+/* Titres */
+h1 {
+    color: #58a6ff;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+p.description {
+    font-size: 14px;
+    color: #8b949e;
+    margin-top: -10px;
+}
+
+/* Formulaire */
+form {
+    margin: 20px 0;
+}
+
+input, select, button {
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #58a6ff;
+    border-radius: 5px;
+    background: #161b22;
+    color: #c9d1d9;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus, select:focus, button:focus {
+    border-color: #2ea043;
+    box-shadow: 0 0 5px #2ea043;
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+    background: #238636; /* Vert foncé */
+    transition: background 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background: #2ea043; /* Vert clair */
+    transform: scale(1.05);
+}
+
+/* Résultats */
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #58a6ff;
+    border-radius: 5px;
+    background: #0d1117;
+    color: #c9d1d9;
+    text-align: left;
+    white-space: pre-wrap; /* Respecter les retours à la ligne */
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-x: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-family: "Courier New", monospace; /* Style type console */
+}
+
+/* Pied de page */
+footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #8b949e;
+    text-align: center;
+}
+
+footer a {
+    color: #58a6ff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #2ea043;
+}
+
+/* Liens */
+a {
+    color: #58a6ff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #2ea043;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+/* Style pour le conteneur défilant avec fond sombre et texte clair */
+.scrollable {
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: #000000;
+    color: #e0e0e0;            /* Texte clair (presque blanc) */
+    padding: 15px;
+    border: 2px solid #58a6ff; /* Bordure lumineuse bleue */
+    border-radius: 8px;        /* Coins arrondis */
+    font-family: 'Courier New', Courier, monospace; /* Police monospacée */
+    font-size: 8px;
+    line-height: 1.5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Ombre douce et plus marquée */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Effet au survol */
+.scrollable:hover {
+    background-color: #121417;  /* Variation du fond au survol */
+    color: #FFD700;
+    transform: scale(1.05);      /* Effet de zoom */
+}
+
+/* Préserver la mise en forme du texte */
+.scrollable pre {
+    margin: 0;
+    white-space: pre-wrap; /* Respect des retours à la ligne */
+    word-wrap: break-word; /* Retirer les mots trop longs */
+    word-break: break-word; /* Forcer la coupure des mots */
+}
