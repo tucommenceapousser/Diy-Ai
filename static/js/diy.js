@@ -3,6 +3,7 @@ document.getElementById("diyForm").addEventListener("submit", async (e) => {
     const prompt = document.getElementById("prompt").value.trim();
     const type_request = document.getElementById("type_request").value;
     const resultDiv = document.getElementById("result");
+    const loaderDiv = document.getElementById("loader"); // Référence au loader
 
     // Validation côté client
     if (!prompt) {
@@ -10,6 +11,9 @@ document.getElementById("diyForm").addEventListener("submit", async (e) => {
         resultDiv.innerHTML = "<pre>Veuillez entrer un thème ou un projet précis.</pre>";
         return;
     }
+
+    // Afficher le loader avant de faire la requête
+    loaderDiv.style.display = "block";
 
     // Envoyer la requête au serveur
     try {
@@ -38,6 +42,9 @@ document.getElementById("diyForm").addEventListener("submit", async (e) => {
     } catch (err) {
         resultDiv.style.display = "block";
         resultDiv.innerHTML = `<pre>Erreur de connexion : ${err.message}</pre>`;
+    } finally {
+        // Cacher le loader après la réponse
+        loaderDiv.style.display = "none";
     }
 });
 
