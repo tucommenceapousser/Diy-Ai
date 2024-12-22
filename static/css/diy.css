@@ -181,7 +181,7 @@ a:hover {
         border-radius: 50%;
         width: 40px;
         height: 40px;
-        animation: spin 1s linear infinite;
+        animation: l16 2s linear infinite;
     }
 
     @keyframes spin {
@@ -190,7 +190,7 @@ a:hover {
     }
 
 /* HTML: <div class="loader"></div> */
-.loader {
+.loaderr {
   width: 64px;
   aspect-ratio: 1;
   background: 
