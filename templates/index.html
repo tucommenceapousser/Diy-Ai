@@ -1,31 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>trhacknon DIY Helper</title>
-    <link rel="stylesheet" href="/static/css/diy.css">
+    <meta name="description" content="Découvrez des idées et tutoriels DIY générés par AI pour des projets créatifs, de la fabrication d'orgonite à la construction de moteurs Stirling.">
+    <meta name="author" content="trhacknon">
+    <meta name="keywords" content="DIY, projets créatifs, tutoriels, fabrication orgonite, moteur Stirling, AI, tutoriels DIY, matériaux DIY">
+    
+    <!-- Open Graph (OG) Meta Tags -->
+    <meta property="og:title" content="DIY AI Helper">
+    <meta property="og:description" content="Des idées et tutoriels DIY générés par AI pour vous aider à réaliser des projets créatifs, de la fabrication d'orgonite à la construction de moteurs Stirling.">
+    <meta property="og:image" content="https://a.top4top.io/p_32777h5fo0.jpg">
+    <meta property="og:url" content="https://votre-site.com">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Cards Meta Tags -->
+    <meta name="twitter:title" content="DIY AI Helper">
+    <meta name="twitter:description" content="Trouvez des idées et des étapes pour réaliser des projets DIY grâce à l'AI. Explorez la fabrication d'orgonite et la construction de moteurs Stirling.">
+    <meta name="twitter:image" content="https://a.top4top.io/p_32777h5fo0.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <title>DIY AI Helper</title>
+    <link rel="stylesheet" href="static/diy.css">
 </head>
 <body>
-    <div class="container">
-        <h1>trhacknon DIY Helper</h1>
-        <p class="description">
-            Cet outil vous permet de trouver des idées de projets DIY selon vos thèmes ou matériaux à disposition,
-            ou d'obtenir des étapes détaillées pour réaliser un projet. Développé par <strong>trhacknon</strong>.
-        </p>
-        <form id="diyForm">
-            <input type="text" id="prompt" placeholder="Entrez un thème ou un projet précis" required>
-            <select id="type_request">
-                <option value="idea">Trouver une idée de projet DIY</option>
-                <option value="method">Obtenir une méthode pour un projet précis</option>
-            </select>
-            <button type="submit">Envoyer</button>
-        </form>
-        <div id="result" class="result scrollable" style="display: none;"></div>
+    <h1>DIY AI Helper</h1>
+
+    <form id="projectForm">
+        <label for="prompt">Quel type de projet souhaitez-vous ?</label>
+        <input type="text" id="prompt" name="prompt">
+        
+        <label for="type_request">Type de demande :</label>
+        <select id="type_request" name="type_request">
+            <option value="idea">Idée de projet</option>
+            <option value="method">Méthode de réalisation</option>
+        </select>
+
+        <button type="submit">Soumettre</button>
+    </form>
+
+    <div id="response"></div>
+    <div id="downloadLinkContainer" style="display: none;">
+        <a id="downloadLink" href="" download> Télécharger le fichier généré </a>
     </div>
+
+    <script>
+        // Code JavaScript pour gérer la soumission du formulaire et l'affichage de la réponse
+        document.getElementById('projectForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const prompt = document.getElementById('prompt').value;
+            const typeRequest = document.getElementById('type_request').value;
+
+            fetch('/ask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ prompt, type_request: typeRequest }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Affichage de la réponse
+                document.getElementById('response').innerText = data.response;
+
+                // Si un lien de téléchargement est disponible, l'afficher
+                if (data.download_link) {
+                    const downloadLink = document.getElementById('downloadLink');
+                    downloadLink.href = data.download_link;
+                    document.getElementById('downloadLinkContainer').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+            });
+        });
+    </script>
     <footer>
         © 2024 <strong>trhacknon</strong>. Tous droits réservés. Développé pour partager l'esprit DIY.
     </footer>
-    <script src="/static/js/diy.js"></script>
 </body>
 </html>
