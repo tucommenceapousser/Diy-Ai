@@ -70,7 +70,7 @@ L'interface a été conçue pour être claire et fun, avec un contraste agréabl
 
 4. **Entrez votre clé API OpenAI** :
     - Créez un compte OpenAI et récupérez votre clé API.
-    - Remplacez `YOUR_API_KEY` dans le fichier `app.py` par votre clé API.
+    - Ajouter votre clé `OPENAI_API_KEY` dans le fichier `.env`.
 
 ---
 
