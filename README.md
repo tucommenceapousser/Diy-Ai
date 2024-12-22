@@ -1,6 +1,12 @@
 # **Diy-Ai** : L'Assistant DIY Intelligent
 
+
 ![Logo](https://f.top4top.io/p_32777joty0.jpg)  <!-- Remplacez par votre logo -->
+
+## 🚀 Démo en ligne
+
+Essayez la démo en ligne ici :  
+[**DIY AI Helper Demo**](https://trkn-diy-ai.onrender.com/)
 
 ---
 
