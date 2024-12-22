@@ -1,12 +1,9 @@
-from flask import Flask, render_template, request, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify
 import openai
 import os
 from dotenv import load_dotenv
 
 app = Flask(__name__)
-
-# Chargez les variables d'environnement
-load_dotenv()
 
 # Configurez votre clé API OpenAI
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -28,19 +25,23 @@ def ask():
 
         # Créez la question selon le type de demande
         if type_request == "idea":
+            # Si c'est une demande d'idée, ajoutez plus de contexte pour guider la réponse
             if "orgonite" in prompt.lower():
-                question = f"Donne-moi des idées de projets DIY pour fabriquer des objets en orgonite..."
+                question = f"Donne-moi des idées de projets DIY pour fabriquer des objets en orgonite. L'objectif est d'explorer les propriétés énergétiques de l'orgonite, en utilisant des matériaux comme la résine, la poudre de métal, les cristaux, et d'autres éléments associés à l'orgonite. Les projets doivent être éducatifs et expérimentaux, permettant d'expérimenter avec la géométrie sacrée et le magnétisme."
             elif "moteur stirling" in prompt.lower():
-                question = f"Propose-moi des idées de projets DIY pour construire un moteur Stirling..."
+                question = f"Propose-moi des idées de projets DIY pour construire un moteur Stirling. L'objectif est de comprendre le fonctionnement du moteur Stirling, en utilisant des matériaux simples et des techniques de mécanique de base."
             else:
-                question = f"Donne-moi des idées de projets DIY basés sur ce thème ou matériel : {prompt}."
+                # Si le prompt ne concerne pas un projet spécifique, demandez des idées générales
+                question = f"Donne-moi des idées de projets DIY basés sur ce thème ou matériel : {prompt}. Les projets doivent être intéressants, expérimentaux, et éducatifs."
 
         elif type_request == "method":
+            # Si c'est une demande de méthode, ajoutez le contexte approprié
             if "orgonite" in prompt.lower():
-                question = f"Donne-moi des étapes détaillées pour fabriquer de l'orgonite..."
+                question = f"Donne-moi des étapes détaillées pour fabriquer de l'orgonite. Inclut les matériaux nécessaires, comme la résine, les cristaux et la poudre de métal. Précise les étapes pour assembler l'orgonite et explique comment explorer les effets énergétiques du produit final."
             elif "moteur stirling" in prompt.lower():
-                question = f"Donne-moi des étapes détaillées pour construire un moteur Stirling..."
+                question = f"Donne-moi des étapes détaillées pour construire un moteur Stirling. Inclut la liste des matériaux nécessaires, les étapes de fabrication, et les conseils pour comprendre son fonctionnement."
             else:
+                # Demande une méthode générale
                 question = f"Donne-moi des étapes détaillées pour réaliser ce projet DIY : {prompt}."
 
         else:
@@ -53,32 +54,11 @@ def ask():
             max_tokens=1500
         )
 
-        # Récupérer la réponse d'OpenAI
-        tutorial_response = response["choices"][0]["message"]["content"]
-
-        # Générer un fichier texte avec les résultats
-        file_name = f"tutorial_{type_request}_{prompt.replace(' ', '_')}.txt"
-        file_path = os.path.join(app.root_path, 'static', 'downloads', file_name)
-        
-        # Sauvegarder la réponse d'OpenAI dans un fichier
-        with open(file_path, 'w') as f:
-            f.write(tutorial_response)
-
-        # Retourner la réponse à l'utilisateur avec le lien pour télécharger le fichier
-        return jsonify({
-            "response": tutorial_response,
-            "download_link": f"/download/{file_name}"
-        })
+        # Retournez la réponse à l'utilisateur
+        return jsonify({"response": response["choices"][0]["message"]["content"]})
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-# Route pour télécharger les fichiers générés
-@app.route("/download/<filename>")
-def download_file(filename):
-    # Répertoire de stockage des fichiers à télécharger
-    download_dir = os.path.join(app.root_path, 'static', 'downloads')
-    return send_from_directory(download_dir, filename, as_attachment=True)
 
 if __name__ == "__main__":
     app.run(debug=False, host="0.0.0.0")
